@@ -5,7 +5,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'rack_on_lambda/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'shark-on-lambda'
+  spec.name          = 'rack-on-lambda'
   spec.version       = RackOnLambda::VERSION
   spec.authors       = ['Huy Dinh']
   spec.email         = ['mail@huydinh.eu']
