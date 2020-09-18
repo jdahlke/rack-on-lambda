@@ -1,0 +1,5 @@
+.bundle
+coverage
+
+.rspec_status
+gems.locked
