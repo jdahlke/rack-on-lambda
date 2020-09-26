@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe RackOnLambda::Response do
+RSpec.describe RackOnLambda::Adapters::Responses::RestApiResponse do
   describe '#as_json' do
     include_examples 'responds with a well-formatted response' do
       let(:status) { 200 }
