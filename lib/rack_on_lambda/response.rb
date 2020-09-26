@@ -10,26 +10,33 @@ module RackOnLambda
 
     def as_json(_options = {})
       {
-        'statusCode' => @status,
-        'headers' => @headers,
-        'isBase64Encoded' => @base64_encoded,
-        'body' => @body
+        'statusCode' => status,
+        'headers' => headers,
+        'isBase64Encoded' => base64_encoded?,
+        'body' => body
       }
     end
 
     private
 
+    attr_reader :status, :headers, :body
+
+    def base64_encoded?
+      return @base64_encoded if defined?(@base64_encoded)
+
+      encoding = canonical_headers.fetch('content-transfer-encoding', '')
+      @base64_encoded = encoding.casecmp('binary').zero?
+    end
+
+    def canonical_headers
+      @canonical_headers ||= headers.transform_keys { |key| key.to_s.downcase }
+    end
+
     def stringify_body(body)
       result = ''
       body.each { |chunk| result += chunk.to_s }
 
-      if result.ascii_only?
-        @base64_encoded = false
-        result
-      else
-        @base64_encoded = true
-        Base64.strict_encode64(result)
-      end
+      base64_encoded? ? Base64.strict_encode64(result) : result
     end
   end
 end
