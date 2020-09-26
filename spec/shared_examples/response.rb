@@ -21,7 +21,7 @@ RSpec.shared_examples 'responds with a well-formatted response' do
     end
   end
 
-  context 'with an ASCII-only response body' do
+  context 'without a header indicating binary content' do
     let(:body) { 'Hello, world!' }
 
     include_examples 'responds with the right status code, headers, and body'
@@ -31,8 +31,10 @@ RSpec.shared_examples 'responds with a well-formatted response' do
     end
   end
 
-  context 'with a non-ASCII-only response body' do
+  context 'with a header indicating binary content' do
     let(:body) { SecureRandom.bytes(10) }
+
+    before { headers['Content-Transfer-Encoding'] = 'BINARY' }
 
     include_examples 'responds with the right status code, headers, and body'
 

@@ -18,7 +18,7 @@ module RackOnLambda
       end
 
       def response(status, headers, body)
-        Response.new(status, headers, body).as_json
+        Responses::RestApiResponse.new(status, headers, body).as_json
       end
 
       private
