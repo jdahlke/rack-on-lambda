@@ -3,42 +3,14 @@ name: Tests
 on: [push]
 
 jobs:
-  rspec-ruby25:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Set up Ruby 2.5
-        uses: actions/setup-ruby@v1
-        with:
-          ruby-version: 2.5.x
-      - name: Run RSpec
-        run: |
-          gem install bundler
-          bundle install --jobs 4 --retry 3
-          bundle exec rspec
-
-  rubocop-ruby25:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Set up Ruby 2.5
-        uses: actions/setup-ruby@v1
-        with:
-          ruby-version: 2.5.x
-      - name: Run rubocop
-        run: |
-          gem install bundler
-          bundle install --jobs 4 --retry 3
-          bundle exec rubocop
-
   rspec-ruby27:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - name: Set up Ruby 2.7
-        uses: actions/setup-ruby@v1
+        uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.7.x
+          ruby-version: 2.7
       - name: Run RSpec
         run: |
           gem install bundler
@@ -48,11 +20,11 @@ jobs:
   rubocop-ruby27:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - name: Set up Ruby 2.7
-        uses: actions/setup-ruby@v1
+        uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.7.x
+          ruby-version: 2.7
       - name: Run rubocop
         run: |
           gem install bundler

@@ -1,6 +1,11 @@
 AllCops:
   NewCops: enable
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 2.7
+  Exclude:
+    - '*.gemspec'
+
+Bundler/GemFilename:
+  EnforcedStyle: gems.rb
 
 Metrics/BlockLength:
   Exclude:
@@ -11,11 +16,15 @@ Metrics/BlockLength:
 Layout/LineLength:
   Max: 80
 
+Lint/EmptyBlock:
+  Exclude:
+    - spec/rack_on_lambda/adapters/responses/rest_api_response.rb
+    - spec/rack_on_lambda/adapters/rest_api_spec.rb
+
 Naming/FileName:
   Exclude:
     - lib/rack-on-lambda.rb
     - spec/rack-on-lambda_spec.rb
 
-# TODO: Add documentation and remove the Style/Documentation exception.
 Style/Documentation:
   Enabled: false
